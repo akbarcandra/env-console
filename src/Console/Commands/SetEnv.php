@@ -2,6 +2,7 @@
 
 namespace Akbarcandra\EnvConsole\Console\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 
 class SetEnv extends Command
@@ -42,7 +43,7 @@ class SetEnv extends Command
     {
         $path = $this->envPath();
         if (file_exists($path) === false) {
-            $this->error('Env file doesn\'t exists. Please create one by copy from `.env.exampe`.');
+            $this->error('Env file doesn\'t exists. Please create one by copy from `.env.example`.');
             return;
         }
 
@@ -54,7 +55,7 @@ class SetEnv extends Command
             // if env name not exists, create new env variable
             file_put_contents($path, PHP_EOL.$env_var.PHP_EOL, FILE_APPEND);
         } else {
-            $this->comment('Env variable exists: '.$env_var);
+            $this->comment('Env variable exists: '.$env_name.'='.env($env_name));
             if ($this->isConfirmed($env_name) === false) {
                 $this->comment('Phew... No changes were made to your .env file.');
                 return;
@@ -65,6 +66,8 @@ class SetEnv extends Command
                 $env_var, file_get_contents($path)
             ));
         }
+
+        $this->displayVariable($env_name, $env_value);
     }
 
     /**
@@ -87,6 +90,8 @@ class SetEnv extends Command
     /**
      * Check if the modification is confirmed.
      *
+     * @param string $envName
+     * 
      * @return bool
      */
     protected function isConfirmed(string $envName)
@@ -94,5 +99,18 @@ class SetEnv extends Command
         return $this->option('force') ? true : $this->confirm(
             'This will overwrite existing env variable. Are you sure you want to override '.$envName.' ?'
         );
+    }
+
+    /**
+     * Display the enviroment variable.
+     *
+     * @param string $envName
+     * @param string $envValue
+     *
+     * @return void
+     */
+    protected function displayVariable(string $envName, string $envValue)
+    {
+        $this->info('Env variable '.$envName.' ['.$envValue.'] set successfully.');
     }
 }
