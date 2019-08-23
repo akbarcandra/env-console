@@ -11,6 +11,7 @@
     "homepage": "https://github.com/akbarcandra/env-console",
     "keywords": ["Laravel", "env", "console", "env-console"],
     "require": {
+        "illuminate/console": "~5",
         "illuminate/support": "~5"
     },
     "require-dev": {
