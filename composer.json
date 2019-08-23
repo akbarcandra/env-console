@@ -1,0 +1,42 @@
+{
+    "name": "akbarcandra/env-console",
+    "description": "Set .env from your console for Laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Akbar Candrawarsa",
+            "email": "akbarcandrawarsa@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/akbarcandra/env-console",
+    "keywords": ["Laravel", "env", "console", "env-console"],
+    "require": {
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Akbarcandra\\EnvConsole\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Akbarcandra\\EnvConsole\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Akbarcandra\\EnvConsole\\EnvConsoleServiceProvider"
+            ],
+            "aliases": {
+                "EnvConsole": "Akbarcandra\\EnvConsole\\Facades\\EnvConsole"
+            }
+        }
+    }
+}
