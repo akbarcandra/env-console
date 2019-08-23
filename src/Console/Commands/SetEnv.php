@@ -11,7 +11,7 @@ class SetEnv extends Command
      *
      * @var string
      */
-    protected $signature = 'env:set {name} {value}
+    protected $signature = 'env:set
         {name : The environmet variable\'s name.}
         {value : The environment variable\'s value.}
         {--f|force : Skip confirmation when overwriting an existing name.}';
